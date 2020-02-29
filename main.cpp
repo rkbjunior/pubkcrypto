@@ -3,11 +3,15 @@
 #include <vector>
 #include <fstream>
 #include <limits>
+#include <random>
 #include "globals.h"
+#include "pubkcrypto.h"
 
 using namespace std;
 
 int LOGGING = 0;
+int SEED = 10;
+mt19937 rng(SEED);
 
 int main()
 {
@@ -36,6 +40,8 @@ int main()
 
     int option;
     bool running = true;
+    pubkcrypto crypto;
+    uint64_t p, q;
 
     while (running != false) {
         cout << "*******************************\n";
@@ -63,6 +69,10 @@ int main()
         case 1:
             cout << "Key Generation.\n\n";
             // rest of code here
+            
+            
+            crypto.selectPrimes(&p, &q);
+
             break;
         case 2:
             cout << "Encrypt a file.\n\n";
