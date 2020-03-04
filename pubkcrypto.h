@@ -2,15 +2,30 @@
 #define PUBKCRYPTO_H
 
 #include <cstdint>
+#include <vector>
 
 class pubkcrypto {
 
+private:
+    void selectPrimes(uint32_t* q, uint32_t* p);
+
 public:
-    uint64_t getRandom32Bit(uint64_t lower, uint64_t upper);
-    uint64_t power(uint64_t x, uint64_t y, uint64_t p);
-    bool rabinPrimeTest(uint64_t p, int s);
-    void generateKeys(uint64_t* pub, uint64_t* priv);
-    void selectPrimes(uint64_t * q, uint64_t * p);
+    struct PublicKey {
+        uint32_t p;
+        uint32_t g;
+        uint32_t e2;
+
+    };
+    struct PrivateKey {
+        uint32_t p;
+        uint32_t g;
+        uint32_t d;
+    };
+    uint32_t getRandom32Bit(uint32_t lower, uint32_t upper);
+    uint64_t multiplyAndSquare(uint64_t x, uint64_t y, uint64_t p);
+    bool rabinPrimeTest(uint32_t p, int s);
+    void generateKeys(struct PublicKey* pub, struct PrivateKey* priv);
+    uint32_t GetBlockOfPlainText(std::vector<char>* plainTextBuffer);
 
 
 };
