@@ -1,10 +1,14 @@
 #include "pubkcrypto.h"
-#include <random>
+
 #include <iostream>
 #include <cmath>
 #include "globals.h"
 
 using namespace std;
+
+pubkcrypto::pubkcrypto(int seed) : rng(seed)
+{
+}
 
 uint32_t pubkcrypto::getRandom32Bit(uint32_t lower, uint32_t upper)
 {

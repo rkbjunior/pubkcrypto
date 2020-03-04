@@ -11,8 +11,6 @@
 using namespace std;
 
 int LOGGING = 0;
-int SEED = 10;
-mt19937 rng(SEED);
 
 int main()
 {
@@ -22,11 +20,11 @@ int main()
 
     if (remove("ctext.txt") == 0) {
         if (LOGGING > 0)
-            cout << "Deleted ciphertext.txt\n";
+            cout << "Deleted ctext.txt\n";
     }
     else {
         if (LOGGING > 0)
-            cout << "ciphertext.txt was not found or has open handles\n";
+            cout << "ctext.txt was not found or has open handles\n";
     }
 
     if (remove("pubkey.txt") == 0) {
@@ -57,9 +55,14 @@ int main()
             cout << "decrypted_plaintext.txt was not found or has open handles\n\n";
     }
 
+    int seed;
+    cout << "Enter a seed value: ";
+    cin >> seed;
+    cout << "\n\n";
+
     int option;
     bool running = true;
-    pubkcrypto crypto;
+    pubkcrypto crypto(seed);
     pubkcrypto::PrivateKey privKey;
     pubkcrypto::PublicKey pubKey;
     fileio file;
@@ -67,6 +70,7 @@ int main()
     string fileName;
     string keyFileName;
     fstream infile;
+
 
     while (running != false) {
         cout << "*******************************\n";
@@ -92,6 +96,7 @@ int main()
         switch (option)
         {
         case 1:
+
             cout << "Key Generation.\n\n";
             crypto.generateKeys(&pubKey, &privKey);
 
